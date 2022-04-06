@@ -1,9 +1,9 @@
 import Row from "./Row";
 
-const RowList = () => {
+const RowList = ({data}) => {
   return (
     <>
-      <Row />
+      {(data.members) && data.members.map ((member, i) => <Row key={i} data ={member} />)}
     </>
   );
 };

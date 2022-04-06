@@ -4,17 +4,42 @@ import CreateForm from "./components/CreateForm";
 import Modal from "./components/Modal";
 //
 import Data from './data/data.json';
+import { useState } from "react";
 //
 function App() {
   //
     // console.log(Data);
   //
+  const [heroData, setHeroData] = useState(Data);
+  console.log(heroData);
+
+  // const heroLift = (hero)=>{
+  //   setHeroData((prevData) =>[
+  //     ...prevData,
+  //     hero
+  //   ])
+  // }
+
+  const heroLift = (hero)=>{
+    const copyData = {...heroData}
+      copyData.members.push(hero)
+    setHeroData(copyData)
+      
+    //   (prevData) =>{[
+    //   ...prevData.members,
+    //   members.hero
+    // ]})
+  }
+
+  console.log('Hero Data:', heroData);
   return (
     <div className="jumbotron text-center">
-      <Table data={Data}>
-        <RowList />
+      <Table data={heroData}>
+        <RowList data={heroData}/>
       </Table>
-      <CreateForm />
+      <CreateForm
+       liftHero = {heroLift}
+       />
       <Modal />
     </div>
   );
